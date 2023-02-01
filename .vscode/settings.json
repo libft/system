@@ -7,4 +7,5 @@
   "vsicons.associations.files": [
     { "icon": "dependencies", "extensions": ["ft_dependencies.ft", "ft_peer_dependencies.ft"], "filename": true, "format": "svg" },
   ],
+  "sonarlint.pathToCompileCommands": "${workspaceFolder}/compile_commands.json",
 }

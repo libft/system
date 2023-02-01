@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "/path/to/your/project/",
+    "file": "anything.c",
+    "command": "gcc -I .ft/include -std=c99 -Wall -Wextra -Werror -pedantic -Wstrict-prototypes -Wmissing-prototypes anything.c"
+  }
+]

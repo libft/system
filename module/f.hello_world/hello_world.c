@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#include "hello.h"
 
-# include <stdbool.h>
+#include "ft.h"
 
-typedef bool	t_err;
-
-t_err	ft_puts(const char *str);
-
-#endif
+t_err	hello_world(void)
+{
+	return (ft_puts("Hello world!"));
+}
