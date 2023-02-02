@@ -8,14 +8,12 @@ find .ft/module -depth 1 -type d | cut -c 12- | while IFS= read -r line
 do
   case $line in
     h.*)
-      FT_LOAD_NAME_AND_EDITION="$(echo "$line" | cut -c 3-)"
-      FT_LOAD_NAME="${FT_LOAD_NAME_AND_EDITION%%.*}"
-      cp ".ft/module/$line/$FT_LOAD_NAME.h" ".ft/.cache/home/include"
+      cp ".ft/module/$line/${line#h.}.h" ".ft/.cache/home/include"
       ;;
     f.*)
-      FT_LOAD_NAME_AND_EDITION="$(echo "$line" | cut -c 3-)"
-      FT_LOAD_NAME="${FT_LOAD_NAME_AND_EDITION%%.*}"
-      cp ".ft/module/$line/$FT_LOAD_NAME.c" ".ft/.cache/home/src"
+      FT_BUILD_HOME_NAME_AND_EDITION="${line#f.}"
+      FT_BUILD_HOME_NAME="${FT_BUILD_HOME_NAME_AND_EDITION%%.*}"
+      cp ".ft/module/$line/$FT_BUILD_HOME_NAME.c" ".ft/.cache/home/src"
       ;;
   esac
 done

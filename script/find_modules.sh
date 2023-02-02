@@ -11,7 +11,38 @@ fi
 find . -depth 1 -type d | cut -c 3- | grep -vE ^\\.ft\$ | sort | while IFS= read -r line
 do
   if [ -f "$line/ft_dependencies.ft" ]; then
-    echo "./$FT_FIND_MODULES_PREFIX$line"
+    case $line in
+      h.*)
+        FT_FIND_MODULES_NAME_WITHOUT_TYPE=${line#h.}
+        case $FT_FIND_MODULES_NAME_WITHOUT_TYPE in
+          *.*)
+            1>&2 echo "[WARN] $line is not valid module name (header module cannot include edition)"
+            ;;
+          *)
+            echo "./$FT_FIND_MODULES_PREFIX$line"
+        esac
+        ;;
+      f.*)
+        FT_FIND_MODULES_NAME_WITHOUT_TYPE=${line#f.}
+        case $FT_FIND_MODULES_NAME_WITHOUT_TYPE in
+          *.*.*)
+            1>&2 echo "[WARN] $line is not valid module name (too many dots in module name)"
+            ;;
+          *)
+            echo "./$FT_FIND_MODULES_PREFIX$line"
+        esac
+        ;;
+      b.*)
+        FT_FIND_MODULES_NAME_WITHOUT_TYPE=${line#b.}
+        case $FT_FIND_MODULES_NAME_WITHOUT_TYPE in
+          *.*.*)
+            1>&2 echo "[WARN] $line is not valid module name (too many dots in module name)"
+            ;;
+          *)
+            echo "./$FT_FIND_MODULES_PREFIX$line"
+        esac
+        ;;
+    esac
   else
     case $0 in
       /*)

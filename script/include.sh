@@ -2,15 +2,16 @@
 
 set -e
 
+. "$(dirname "$0")/common.sh"
+
 rm -rf ".ft/.cache/include"
 trap 'rm -rf -- ".ft/.cache/include"' EXIT
 mkdir -p ".ft/.cache/include"
 
-sh script/find_modules.sh | grep /h. | sort | while IFS= read -r line
+(cd "$FT_BASE_PATH" && ${MAKE-make} ".ft/.cache/module_list.properties")
+< "$FT_BASE_PATH/.ft/.cache/module_list.properties" grep "^h." | sort | while IFS="=" read -r name path
 do
-  FT_LOAD_NAME_AND_EDITION="${line##*/h.}"
-  FT_LOAD_NAME="${FT_LOAD_NAME_AND_EDITION%%.*}"
-  cp "$line/$FT_LOAD_NAME.h" ".ft/.cache/include"
+  cp "$FT_BASE_PATH/$path/${name#h.}.h" ".ft/.cache/include"
 done
 
 rm -rf .ft/include
