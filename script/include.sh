@@ -8,7 +8,7 @@ rm -rf ".ft/.cache/include"
 trap 'rm -rf -- ".ft/.cache/include"' EXIT
 mkdir -p ".ft/.cache/include"
 
-(cd "$FT_BASE_PATH" && ${MAKE-make} ".ft/.cache/module_list.properties")
+(cd "$FT_BASE_PATH" && ${MAKE-make} -s ".ft/.cache/module_list.properties")
 < "$FT_BASE_PATH/.ft/.cache/module_list.properties" grep "^h." | sort | while IFS="=" read -r name path
 do
   cp "$FT_BASE_PATH/$path/${name#h.}.h" ".ft/.cache/include"

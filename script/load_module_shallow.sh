@@ -4,7 +4,7 @@ set -e
 
 . "$(dirname "$0")/common.sh"
 
-(cd "$FT_BASE_PATH" && ${MAKE-make} ".ft/.cache/module_list.properties")
+(cd "$FT_BASE_PATH" && ${MAKE-make} -s ".ft/.cache/module_list.properties")
 FT_LOAD_PATH="$(grep "$1=" < "$FT_BASE_PATH/.ft/.cache/module_list.properties")"
 if [ -z "$FT_LOAD_PATH" ]; then
   echo "Error: failed to find module \"$1\""
