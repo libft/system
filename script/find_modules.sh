@@ -8,7 +8,7 @@ else
   FT_FIND_MODULES_NEXT_PREFIX="$FT_FIND_MODULES_PREFIX"
 fi
 
-find . -depth 1 -type d | cut -c 3- | grep -vE ^\\.ft\$ | sort | while IFS= read -r line
+find . -depth 1 -type d | cut -c 3- | grep -vE ^\\. | sort | while IFS= read -r line
 do
   if [ -f "$line/ft_dependencies.ft" ]; then
     case $line in
