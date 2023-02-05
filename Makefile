@@ -15,6 +15,11 @@ clean: clean_ft_cache
 clean_ft_cache:
 	rm -rf .ft/.cache
 
+prelude: refresh_include
+.PHOHY: refresh_include
+refresh_include .ft/include: | .ft/.cache
+	FT_BASE_PATH="$$(pwd)" sh script/include.sh
+
 prelude: refresh_module_list
 .PHOHY: refresh_module_list
 refresh_module_list .ft/.cache/module_list.properties: | .ft/.cache
