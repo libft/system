@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
+#include "hello.h"
 
-#include <stdio.h>
-
-t_err	ft_puts(const char *str)
+int	main(void)
 {
-	return (puts(str) == EOF);
+	return (!!hello_world());
 }

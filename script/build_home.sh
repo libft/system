@@ -18,6 +18,18 @@ do
   esac
 done
 
+for extra in "$@"
+do
+  case $extra in
+    *.h)
+      cp "$extra" .ft/.cache/home/include
+      ;;
+    *.c)
+      cp "$extra" .ft/.cache/home/src
+      ;;
+  esac
+done
+
 printf "SRCS := %s\ninclude \$(FT_BASE_PATH)/script/home.mk\n" "$(cd .ft/.cache/home && find src -depth 1 | sort | xargs)" > ".ft/.cache/home/Makefile"
 printf "executable.exe\nlibrary.a\n.cache\n" > ".ft/.cache/home/.gitignore"
 
