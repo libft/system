@@ -32,7 +32,7 @@ clean_module_list:
 prelude: refresh_test_list
 .PHOHY: refresh_test_list
 refresh_test_list .ft/.cache/test_list.properties: | .ft/.cache
-	sh script/test_list.sh > .ft/.cache/test_list.properties
+	sh script/find_tests.sh > .ft/.cache/test_list.properties
 clean: clean_test_list
 .PHOHY: clean_test_list
 clean_test_list:
@@ -41,12 +41,12 @@ clean_test_list:
 clean: run_clean_script
 .PHONY: run_clean_script
 run_clean_script:
-	sh script/run_all.sh clean
+	sh script/run_all_without_cache.sh clean
 
 fclean: run_fclean_script
 .PHONY: run_fclean_script
 run_fclean_script:
-	sh script/run_all.sh fclean
+	sh script/run_all_without_cache.sh fclean
 
 test:
 	FT_BASE_PATH="$$(pwd)" sh script/run_all.sh test
