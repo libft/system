@@ -17,7 +17,7 @@ clean_ft_cache:
 
 prelude: refresh_include
 .PHOHY: refresh_include
-refresh_include .ft/include: | .ft/.cache
+refresh_include .ft/include: refresh_module_list | .ft/.cache
 	FT_BASE_PATH="$$(pwd)" sh script/include.sh
 
 prelude: refresh_module_list
