@@ -41,12 +41,12 @@ clean_test_list:
 clean: run_clean_script
 .PHONY: run_clean_script
 run_clean_script:
-	sh script/run_all_without_cache.sh clean
+	FT_BASE_PATH="$$(pwd)" sh script/run_all_without_cache.sh clean
 
 fclean: run_fclean_script
 .PHONY: run_fclean_script
 run_fclean_script:
-	sh script/run_all_without_cache.sh fclean
+	FT_BASE_PATH="$$(pwd)" sh script/run_all_without_cache.sh fclean
 
 test:
 	FT_BASE_PATH="$$(pwd)" sh script/run_all.sh test
