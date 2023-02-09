@@ -2,10 +2,6 @@
 
 set -e
 
-FT_LOAD_MODULE_DEPTH="${FT_LOAD_MODULE_DEPTH-} "
-export FT_LOAD_MODULE_DEPTH
-printf "%sLoading module %s\n" "$FT_LOAD_MODULE_DEPTH" "$1"
-
 . "$(dirname "$0")/common.sh"
 
 if [ -d ".ft/module/$1" ]; then
