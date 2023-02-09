@@ -23,7 +23,9 @@ case $1 in
   f.*)
     FT_LOAD_NAME_AND_EDITION="${1#f.}"
     FT_LOAD_NAME="${FT_LOAD_NAME_AND_EDITION%%.*}"
-    cp "$FT_BASE_PATH/$FT_LOAD_PATH/$FT_LOAD_NAME.c" "$FT_BASE_PATH/$FT_LOAD_PATH/ft_dependencies.ft" "$FT_BASE_PATH/$FT_LOAD_PATH/ft_peer_dependencies.ft" ".ft/.cache/$1"
+    cp "$FT_BASE_PATH/$FT_LOAD_PATH/$FT_LOAD_NAME.c" "$FT_BASE_PATH/$FT_LOAD_PATH/ft_dependencies.ft" ".ft/.cache/$1"
+    [ ! -f "$FT_BASE_PATH/$FT_LOAD_PATH/ft_peer_dependencies.ft" ] || cp "$FT_BASE_PATH/$FT_LOAD_PATH/ft_peer_dependencies.ft" ".ft/.cache/$1"
+    [ -f "$FT_BASE_PATH/$FT_LOAD_PATH/ft_peer_dependencies.ft" ] || touch ".ft/.cache/$1"
     ;;
   b.*)
     FT_LOAD_NAME_AND_EDITION="${1#b.}"
