@@ -6,6 +6,9 @@ SRCS := src/main.c
 all test: prelude
 .PHONY: prelude
 prelude:
-	< dependencies.txt xargs -L1 sh $(FT_BASE_PATH)/script/load_module_recursive.sh
+	sh $(FT_BASE_PATH)/script/resolve.sh
 	sh $(FT_BASE_PATH)/script/build_home.sh $(SRCS)
 	(cd .ft/home && $(MAKE) executable.exe)
+
+fclean:
+	rm -rf .ft

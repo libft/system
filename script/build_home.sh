@@ -4,7 +4,7 @@ rm -rf ".ft/.cache/home"
 trap 'rm -rf -- ".ft/.cache/home"' EXIT
 mkdir -p ".ft/.cache/home/src" ".ft/.cache/home/include"
 
-find .ft/module -depth 1 -type d | cut -c 12- | while IFS= read -r line
+find ".ft/module" -depth 1 -type d | cut -c 12- | while IFS= read -r line
 do
   case $line in
     h.*)
