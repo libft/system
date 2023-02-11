@@ -8,7 +8,7 @@ if [ -d ".ft/module/$1" ]; then
   exit
 fi
 
-FT_LOAD_PATH="$(grep "$1=" < "$FT_BASE_PATH/.ft/.cache/module_list.properties")"
+FT_LOAD_PATH="$(grep "$1=" < "$FT_BASE_PATH/.ft/.cache/module_list.properties" || [ $? -eq 1 ])"
 if [ -z "$FT_LOAD_PATH" ]; then
   echo "Error: failed to find module \"$1\""
   exit 1
