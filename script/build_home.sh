@@ -4,7 +4,7 @@ rm -rf ".ft/.cache/home"
 trap 'rm -rf -- ".ft/.cache/home"' EXIT
 mkdir -p ".ft/.cache/home/src" ".ft/.cache/home/include"
 
-find ".ft/module" -depth 1 -type d | cut -c 12- | while IFS= read -r line
+(cd ".ft/module" && echo */ | xargs -n 1 echo | sort | sed 's#/$##') | while IFS= read -r line
 do
   case $line in
     h.*)
@@ -30,7 +30,7 @@ do
   esac
 done
 
-printf "SRCS := %s\ninclude \$(FT_BASE_PATH)/script/home.mk\n" "$(cd .ft/.cache/home && find src -depth 1 | sort | xargs)" > ".ft/.cache/home/Makefile"
+printf "SRCS := %s\ninclude \$(FT_BASE_PATH)/script/home.mk\n" "$(cd .ft/.cache/home && echo src/* | xargs -n 1 echo | sort | xargs)" > ".ft/.cache/home/Makefile"
 printf "executable.exe\nlibrary.a\n.cache\n" > ".ft/.cache/home/.gitignore"
 
 rm -rf ".ft/home"

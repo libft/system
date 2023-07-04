@@ -8,8 +8,12 @@ else
   FT_FIND_MODULES_NEXT_PREFIX="$FT_FIND_MODULES_PREFIX"
 fi
 
-find . -depth 1 -type d | cut -c 3- | grep -vE ^\\. | sort | while IFS= read -r line
+echo */ | xargs -n 1 echo | sort | while IFS= read -r line
 do
+  if [ "$line" = "*/" ]; then
+    exit 0
+  fi
+  line=$(printf "%s" "$line" | sed 's#/$##')
   if [ -f "$line/ft_dependencies.ft" ]; then
     case $line in
       h.*)

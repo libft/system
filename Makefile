@@ -17,12 +17,12 @@ clean_ft_cache:
 
 prelude: refresh_include
 .PHOHY: refresh_include
-refresh_include .ft/include: refresh_module_list | .ft/.cache
+refresh_include .ft/include: refresh_module_list .ft/.cache
 	FT_BASE_PATH="$$(pwd)" sh script/include.sh
 
 prelude: refresh_module_list
 .PHOHY: refresh_module_list
-refresh_module_list .ft/.cache/module_list.properties: | .ft/.cache
+refresh_module_list .ft/.cache/module_list.properties: .ft/.cache
 	sh script/module_list.sh > .ft/.cache/module_list.properties
 clean: clean_module_list
 .PHOHY: clean_module_list
@@ -31,7 +31,7 @@ clean_module_list:
 
 prelude: refresh_test_list
 .PHOHY: refresh_test_list
-refresh_test_list .ft/.cache/test_list.properties: | .ft/.cache
+refresh_test_list .ft/.cache/test_list.properties: .ft/.cache
 	sh script/find_tests.sh > .ft/.cache/test_list.properties
 clean: clean_test_list
 .PHOHY: clean_test_list
@@ -51,6 +51,8 @@ run_fclean_script:
 test:
 	FT_BASE_PATH="$$(pwd)" sh script/run_all.sh test
 
+.NOTPARALLEL: re
+.PHONY: re
 re:
 	$(MAKE) fclean
 	$(MAKE) all
